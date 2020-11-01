@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBarBlue;
 
     private View viewColor;
+
+    private Button buttonDisplay;
+
+    private Toast toast;
 
     private int red;
     private int green;
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         seekBarBlue = (SeekBar)findViewById(R.id.seek_bar_blue);
 
         viewColor = (View)findViewById(R.id.view_color);
+
+        buttonDisplay = (Button)findViewById(R.id.button_display);
 
         seekBarRed.setProgress(red);
         seekBarRed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -117,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         updateColor();
+
+        buttonDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v){
+                //Toast.makeText(MainActivity.this, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG).show();
+                toast = Util.toast(MainActivity.this, toast, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG);
+            }
+        });
 
         containerMain.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
