@@ -1,8 +1,10 @@
 package com.example.colorpicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
         initViews();
     }
 
+    @Override
+    public void onConfigurationChanged(final Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+
+        layoutViews();
+    }
+
     private void initValues() {
         red = 255;
         green = 67;
@@ -69,18 +78,18 @@ public class MainActivity extends AppCompatActivity {
         seekBarRed.setProgress(red);
         seekBarRed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser){
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 red = progress;
                 updateColor();
             }
 
             @Override
-            public void onStartTrackingTouch(final SeekBar seekBar){
+            public void onStartTrackingTouch(SeekBar seekBar){
 
             }
 
             @Override
-            public void onStopTrackingTouch(final SeekBar seekBar){
+            public void onStopTrackingTouch(SeekBar seekBar){
 
             }
         });
@@ -88,18 +97,18 @@ public class MainActivity extends AppCompatActivity {
         seekBarGreen.setProgress(green);
         seekBarGreen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser){
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 green = progress;
                 updateColor();
             }
 
             @Override
-            public void onStartTrackingTouch(final SeekBar seekBar){
+            public void onStartTrackingTouch(SeekBar seekBar){
 
             }
 
             @Override
-            public void onStopTrackingTouch(final SeekBar seekBar){
+            public void onStopTrackingTouch(SeekBar seekBar){
 
             }
         });
@@ -107,18 +116,18 @@ public class MainActivity extends AppCompatActivity {
         seekBarBlue.setProgress(blue);
         seekBarBlue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser){
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 blue = progress;
                 updateColor();
             }
 
             @Override
-            public void onStartTrackingTouch(final SeekBar seekBar){
+            public void onStartTrackingTouch(SeekBar seekBar){
 
             }
 
             @Override
-            public void onStopTrackingTouch(final SeekBar seekBar){
+            public void onStopTrackingTouch(SeekBar seekBar){
 
             }
         });
@@ -127,12 +136,16 @@ public class MainActivity extends AppCompatActivity {
 
         buttonDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(final View v){
+            public void onClick(View v){
                 //Toast.makeText(MainActivity.this, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG).show();
                 toast = Util.toast(MainActivity.this, toast, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG);
             }
         });
 
+        layoutViews();
+    }
+
+    private void layoutViews() {
         containerMain.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout(){
