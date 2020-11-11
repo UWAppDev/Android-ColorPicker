@@ -1,6 +1,5 @@
 package com.example.colorpicker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig){
+    public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
 
         layoutViews();
@@ -137,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
         buttonDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //Toast.makeText(MainActivity.this, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG).show();
-                toast = Util.toast(MainActivity.this, toast, "red = " + red + "/255, green = " + green + "/255, blue = " + blue + "/255", Toast.LENGTH_LONG);
+                toast = Util.toast(MainActivity.this, toast, getString(R.string.rgb_format, red, green, blue), Toast.LENGTH_LONG);
             }
         });
 
